@@ -1,6 +1,6 @@
 """
 SafoneAPI v1.0
-Copyright (c) 2024 AsmSafone
+Copyright (c) 2025 AsmSafone
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,25 +61,25 @@ class InvalidRequest(BaseError):
     """
     Raised when an invalid request is made.
     """
-    message = "Invalid Request, Please read docs: https://api.safone.dev/redoc"
+    message = "Invalid Request, Please read docs: https://api.safone.co/redoc"
 
 
 class InvalidContent(BaseError):
     """
     Raised when the content of the response is invalid.
     """
-    message = "Invalid Content, Please report this: https://api.safone.dev/report"
+    message = "Invalid Content, Please report this: https://api.safone.co/report"
 
 
 class GenericApiError(BaseError):
     """
     Raised when the API returns an error that is not handled by this library.
     """
-    message = "Api Call Failed, Please report this: https://api.safone.dev/report"
+    message = "Api Call Failed, Please report this: https://api.safone.co/report"
 
 
 class ConnectionError(BaseError):
     """
     Raised when a connection error occurs.
     """
-    message = "Failed to communicate server, Please report this: https://api.safone.dev/report"
+    message = "Failed to communicate server, Please report this: https://api.safone.co/report"

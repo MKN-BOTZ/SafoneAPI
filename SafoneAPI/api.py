@@ -1,6 +1,6 @@
 """
 SafoneAPI v1.0
-Copyright (c) 2024 AsmSafone
+Copyright (c) 2025 AsmSafone
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,14 +49,14 @@ from aiohttp.client_exceptions import (
 class SafoneAPI:
     """
     SafoneAPI class to access all the endpoints
-    Documentation: https://api.safone.dev/docs
+    Documentation: https://api.safone.co/docs
     Support Group: https://t.me/AsmSupport
     Updates Channel: https://t.me/AsmSafone
 
     """
 
     def __init__(self, api: str = None, session: aiohttp.ClientSession = None):
-        self.api = api or "https://api.safone.dev/"
+        self.api = api or "https://api.safone.co/"
         self.session = session or aiohttp.ClientSession
 
     def _get_name(self, user: User) -> str:
@@ -786,6 +786,19 @@ class SafoneAPI:
         """
         return await self._fetch("currency", origin=origin, target=target, amount=amount)
 
+    async def tradingview(self, symbol: str, interval: str = "1h"):
+        """
+        Returns An Object.
+
+                Parameters:
+                        symbol (str): Crypto symbol to search
+                        interval (str): Interval of trading [OPTIONAL]
+                Returns:
+                        Result object (str): Results which you can access with dot notation
+
+        """
+        return await self._fetch("tradingview", symbol=symbol, interval=interval)
+
     async def spam_scan(self, message: Union[Message, str]):
         """
         Returns An Object.
@@ -1135,17 +1148,18 @@ class SafoneAPI:
         """
         return await self._fetch("spellcheck", text=text)
 
-    async def paraphrase(self, text: str):
+    async def paraphrase(self, text: str, creativity: int = 2):
         """
         Returns An Object.
 
                 Parameters:
                         text (str): Some text
+                        creativity (int): Creativity level (1-3) [OPTIONAL]
                 Returns:
                         Result object (str): Results which you can access with dot notation
 
         """
-        json = dict(text=text)
+        json = dict(text=text, creativity=creativity)
         return await self._post_json("paraphrase", json=json)
 
     async def grammarly(self, text: str):
@@ -1317,7 +1331,7 @@ class SafoneAPI:
             )
         return await self._post_json("execute", json=json)
 
-    async def bard(self, message: Union[Message, str], chat_mode: str = None, dialog_messages: list = []):
+    async def gemini(self, message: Union[Message, str], chat_mode: str = None, dialog_messages: list = []):
         """
         Returns An Object.
 
@@ -1357,7 +1371,7 @@ class SafoneAPI:
                 chat_mode=chat_mode,
                 dialog_messages=formated_messages,
             )
-        return await self._post_json("bard", json=json)
+        return await self._post_json("gemini", json=json)
 
     async def llama(self, message: Union[Message, str], chat_mode: str = None, dialog_messages: list = []):
         """
